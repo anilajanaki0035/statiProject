@@ -9,7 +9,7 @@ print("****************************************************************")
 repeat = "y"
 while repeat == "y":
     try:
-        text = input("enter the P value  to calculate  chi square   ")
+        text = input("enter the P value   ")
         value = float(text)
     except ValueError:
         print("Error! This is not a number. Try again.")
@@ -37,7 +37,7 @@ while repeat == "y":
     repeat = input(" press y to continue / any key to exit ")
 
 print("****************************************************************")
-print("Calculation of chi square value from given p  and DOF")
+print("Calculation of P from given chi square value and DOF")
 print("****************************************************************")
 repeat = "y"
 while repeat == "y":
