@@ -11,26 +11,43 @@ while repeat == "y":
     try:
         text = input("enter the P value   ")
         value = float(text)
+        length=int(len(text))-2
     except ValueError:
         print("Error! This is not a number. Try again.")
     else:
         try:
             text = input("enter the degrees of freedom ")
-            number = int(text) / 2
+            dof = int(text) / 2
         except ValueError:
             print("Error! This is not a number. Try again.")
         else:
-            gamma = np.math.gamma(number)
-            constant = 1 / (pow(2, number) * gamma)
+            gamma = np.math.gamma(dof)
+            constant = 1 / (pow(2, dof) * gamma)
             r = 0
-            for chi in np.arange(0, 90, 0.001):
-                ProbabilityDensity = lambda x: constant * np.exp(-x / 2) * pow(x, number - 1)
+            start = 0
+            end = 90000
+            mid = round(float((start + end) / 2), 8)
+            count = 100
+            while count > 0:
+                chi = round(mid / 1000, 8)
+                ProbabilityDensity = lambda x: constant * np.exp(-x / 2) * pow(x, dof - 1)
                 result, _ = quad(ProbabilityDensity, 0, chi)
-                p = round(1 - float(result), 4)
+                p = round(1 - float(result), length)
+
                 if p == value:
                     r = 1
                     print("the chi square value is ", chi)
                     break
+                else:
+                    if p == 1.0:
+                        end = mid
+                    else:
+                        if p < value:
+                            end = mid
+                        else:
+                            start = mid
+                mid = round(float((start + end) / 2), 8)
+                count = count - 1
             if r == 0:
                 print("unable to find !!!! plz try again !!!!")
 
