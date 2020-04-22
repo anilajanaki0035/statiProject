@@ -1,4 +1,3 @@
-
 from scipy.integrate import quad
 import numpy as np
 
@@ -6,6 +5,8 @@ import numpy as np
 def normalProbabilityDensity(x):
     constant = 1.0 / np.sqrt(2 * np.pi)
     return (constant * np.exp((-x ** 2) / 2.0))
+
+
 print("*********************************************")
 print(" Calculation of P(z<z0) for given z0 ")
 print("*********************************************")
@@ -34,14 +35,28 @@ while repeatAlpha == "y":
         print("Error! This is not a number. Try again.")
     else:
         r = 0
-        for z in np.arange(-3.49, 3.5, 0.01):
+        start = -349
+        end = 350
+        mid = round(float((start + end) / 2),6)
+        count = 100
+        while count > 0:
+            z = round(mid / 100, 8)
+            print ("z iz" ,z)
             result, _ = quad(normalProbabilityDensity, np.NINF, z)
-            if round(float(result), 4) == round(number, 4):
+            p = round(float(result), 8)
+            print("result is ", p)
+            if p == round(number, 8):
                 print("the calculated z value is")
                 print(z)
                 r = 1
                 break
-
+            else:
+                if p > number:
+                    end = mid
+                else:
+                    start = mid
+            mid = round(float((start + end) / 2), 8)
+            count = count - 1
         if r == 0:
             print("Sorry !!!! unable to find , try a different value")
 
