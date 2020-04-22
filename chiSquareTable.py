@@ -27,13 +27,17 @@ while repeat == "y":
             start = 0
             end = 90000
             mid = round(float((start + end) / 2), 8)
-            count = 100
+            count = 150
             while count > 0:
+
                 chi = round(mid / 1000, 8)
+                if chi== 0:
+                    r=1
+                    print("the chi square value is ", chi)
+                    break
                 ProbabilityDensity = lambda x: constant * np.exp(-x / 2) * pow(x, dof - 1)
                 result, _ = quad(ProbabilityDensity, 0, chi)
                 p = round(1 - float(result), length)
-
                 if p == value:
                     r = 1
                     print("the chi square value is ", chi)
