@@ -41,10 +41,10 @@ while repeatAlpha == "y":
         count = 100
         while count > 0:
             z = round(mid / 100, 8)
-            print ("z iz" ,z)
+
             result, _ = quad(normalProbabilityDensity, np.NINF, z)
             p = round(float(result), 8)
-            print("result is ", p)
+
             if p == round(number, 8):
                 print("the calculated z value is")
                 print(z)
